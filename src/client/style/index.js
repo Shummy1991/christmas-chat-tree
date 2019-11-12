@@ -21,24 +21,6 @@ export default createGlobalStyle`
         display: table;
     }
 
-    .vertical-helper {
-        display: table-cell;
-        vertical-align: middle;
-    }
-
-    .content-scale {
-        margin: auto;
-        box-sizing: border-box;
-    }
-
-    .content {
-        width: ${p => p.theme.width}px;
-        height: ${p => p.theme.height}px;
-        transition: 1.2s;
-    }
-
-    $distance: 140px;
-
     @keyframes fadeIn {
         0% {
             opacity: 0;
