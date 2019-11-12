@@ -9,6 +9,7 @@ export default createGlobalStyle`
         font-size: 34px;
         color: white;
         overflow: hidden;
+        font-family: cursive;
     }
     body {
         overflow-y: hidden;
