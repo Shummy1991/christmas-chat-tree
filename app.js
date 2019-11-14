@@ -88,6 +88,7 @@ app.get("*", (req, res, next) => {
         Promise.all(promises).then(() => {
             // const state = store.getState();
             // store.dispatch(setWebp(req));
+            console.log(store.getState());
             usedRoutes.forEach(route => {
                 route.renderSeo(store);
             });
