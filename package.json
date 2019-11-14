@@ -18,7 +18,8 @@
     "start": "cross-env NODE_ENV=production node ./server.bundle.js",
     "test": "jest --watch",
     "coverage": "jest --coverage",
-    "bs": "npm run build && npm run start"
+    "bs": "npm run build && npm run start",
+    "heroku-postbuild": "echo Skip build on Heroku"
   },
   "dependencies": {
     "@babel/preset-es2015": "^7.0.0-beta.53",
