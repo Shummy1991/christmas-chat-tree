@@ -48,6 +48,7 @@ export default {
     loadData: async({ dispatch }) => {
         console.log("load data app", dispatch);
         await dispatch(login());
+        console.log("load data get users", dispatch);
         await dispatch(getUsers());
     },
     renderSeo: () => {},

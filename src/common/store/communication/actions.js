@@ -1,8 +1,8 @@
 import { GET_USERS } from "./types";
 
 export const getUsers = () => async(dispatch, getState, api) => {
+    console.log("get users");
     const { data: users } = await api.get("/users");
-    console.log("get users", users);
     dispatch({
         type: GET_USERS,
         payload: users,
