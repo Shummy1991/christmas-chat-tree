@@ -2,12 +2,15 @@ import React from "react";
 import Elements, { Username } from "./Heads";
 
 
-export default () => (
+export default ({ users }) => (
     <div>
-        {Elements.map((Element, index) => (
-            <Element>
-                <Username>User {index}</Username>
-            </Element>
-        ))}
+        {users.map(({ username, position }) => {
+            const Element = Elements[position];
+            return (
+                <Element key={position}>
+                    <Username>{username}</Username>
+                </Element>
+            );
+        })}
     </div>
 );

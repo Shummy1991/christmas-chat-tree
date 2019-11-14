@@ -34,7 +34,7 @@ app.use(redirectToHTTPS([/localhost:(\d{4})/], [/\/insecure/], 301));
 if (process.env.RENDERER) {
     app.use(
         "/api",
-        proxy(process.env.API_SERVER || "localhost:8080", {
+        proxy(process.env.API_SERVER || "localhost:8000", {
             limit: "10mb",
             proxyReqPathResolver: (req) => {
                 return "/api" + req.path + "?" + Object.keys(req.query).map(param => param + "=" + req.query[param]).join("&");
@@ -105,6 +105,6 @@ server.listen(process.env.PORT || 4000, (err) => {
     if (err) {
         console.error(err);
     } else {
-        console.info("Listening at http://localhost:" + (process.env.PORT || 3001));
+        console.info("Listening at http://localhost:" + (process.env.PORT || 4000));
     }
 });

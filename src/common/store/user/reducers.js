@@ -1,8 +1,10 @@
-// import { SET_WEBP } from "../actions/webp";
+import { LOGIN } from "./types";
 
 export default (user = {}, action) => {
-    // const { payload } = action;
     switch (action.type) {
+        case LOGIN: {
+            return action.payload;
+        }
         default:
             return user;
     }

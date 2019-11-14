@@ -7,26 +7,23 @@ import { withRouter } from "react-router-dom";
 // import routing from "../routing";
 
 import { ThemeProvider } from "styled-components";
-// import { getUser } from "../actions/user";
+import { login } from "../../common/store/user/actions";
+import { getUsers, startCommunication } from "../../common/store/communication/actions";
 import GlobalCss from "../style/index.js";
 import theme from "../style/theme";
 
 
 class App extends Component {
-    // componentDidMount() {
-    //     const { user } = this.props;
-    //     if (!user || !user.loggedIn) {
-    //         this.props.getUser();
-    //     } else {
-    //         const { _id: id, email } = user;
-    //         // if (window.OneSignal) {
-    //         //     window.OneSignal.push(function() {
-    //         //         window.OneSignal.showNativePrompt();
-    //         //     });
-    //         // }
-    //     }
-    //     this.setState({loaded: true});
-    // }
+    componentDidMount() {
+        const { user, communication } = this.props;
+        if (!user.username) {
+            this.props.login();
+        }
+        if (!communication.usersInitialized) {
+            this.props.getUsers();
+        }
+        this.props.startCommunication();
+    }
     render() {
         const { route, user } = this.props;
         if (user === null) return null;
@@ -42,11 +39,15 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    user: state.user ? {...state.user} : null
+    user: state.user,
+    communication: state.communication,
 });
 
 export default {
-    component: withRouter(connect(mapStateToProps, {})(App)),
-    // loadData: ({ dispatch }) => dispatch(getUser()),
+    component: withRouter(connect(mapStateToProps, { login, getUsers, startCommunication })(App)),
+    loadData: async({ dispatch }) => {
+        await dispatch(login());
+        await dispatch(getUsers());
+    },
     renderSeo: () => {},
 };

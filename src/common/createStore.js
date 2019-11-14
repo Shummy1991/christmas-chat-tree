@@ -4,7 +4,6 @@ import reducers from "./store/reducers";
 import axiosInstance from "./axiosInstance";
 
 export default req => {
-    console.log(reducers);
     const store = createStore(
         reducers,
         {},

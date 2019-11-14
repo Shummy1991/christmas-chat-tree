@@ -17,6 +17,7 @@ const ContentScale = styled.div`
 const Content = styled.div`
     width: ${p => p.theme.width}px;
     height: ${p => p.theme.height}px;
+    position: relative;
     transition: 1.2s;
 `;
 
