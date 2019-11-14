@@ -46,6 +46,7 @@ const mapStateToProps = (state) => ({
 export default {
     component: withRouter(connect(mapStateToProps, { login, getUsers, startCommunication })(App)),
     loadData: async({ dispatch }) => {
+        console.log("load data app");
         await dispatch(login());
         await dispatch(getUsers());
     },
