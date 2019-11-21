@@ -6,6 +6,7 @@ import cors from "cors";
 
 const allowAccess = res => {
     res.setHeader("Access-Control-Allow-Credentials", true);
+    res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS");
     res.setHeader("Access-Control-Allow-Origin", "http://localhost:4000");
 };
 
