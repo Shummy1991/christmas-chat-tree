@@ -7,9 +7,14 @@ import cors from "cors";
 const allowAccess = res => {
     res.setHeader("Access-Control-Allow-Credentials", true);
     res.setHeader("Access-Control-Allow-Origin", "http://localhost:4000");
-}
+};
+
 export default (app) => {
     app.use(cors());
+    app.option("*", (req, res, next) => {
+        allowAccess(res);
+        return next();
+    });
     app.post("*", (req, res, next) => {
         allowAccess(res);
         if (req.url.slice(0, 5) === "/api/") {

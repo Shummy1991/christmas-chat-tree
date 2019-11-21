@@ -1,7 +1,7 @@
 import { GET_USERS, RECEIVE_MESSAGE, REMOVE_MESSAGE } from "./types";
+import baseURL from "../../baseURL";
 
 export const getUsers = () => async(dispatch, getState, api) => {
-    console.log("get users");
     const { data: users } = await api.get("/users");
     dispatch({
         type: GET_USERS,
@@ -10,7 +10,7 @@ export const getUsers = () => async(dispatch, getState, api) => {
 };
 
 export const startCommunication = () => async(dispatch, getState, api) => {
-    const eventSource = new EventSource("/api/communication");
+    const eventSource = new EventSource(baseURL + "/communication");
     eventSource.onmessage = (message) => {
         const { type, data } = JSON.parse(message.data);
         switch (type) {

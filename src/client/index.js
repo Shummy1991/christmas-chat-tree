@@ -18,11 +18,12 @@ import "intl";
 
 import axios from "axios";
 import { $document } from "../common/window";
+import baseURL from "../common/baseURL";
 const history = createBrowserHistory();
 
 
 const axiosInstance = axios.create({
-    baseURL: "https://christmas-chat-tree.herokuapp.com/api",
+    baseURL: baseURL,
     // baseURL: "/api"
     withCredentials: true,
 });
