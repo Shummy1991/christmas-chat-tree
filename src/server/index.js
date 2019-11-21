@@ -14,6 +14,10 @@ export default (app) => {
     app.use(cors());
     app.options("*", (req, res, next) => {
         allowAccess(res);
+        if (req.url.slice(0, 5) === "/api/") {
+            req.url = req.url.slice(4);
+            return next();
+        }
         return next();
     });
     app.post("*", (req, res, next) => {

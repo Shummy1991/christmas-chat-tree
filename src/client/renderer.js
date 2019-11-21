@@ -71,16 +71,12 @@ export default async(req, store, context, res) => {
                 ${process.env.NODE_ENV === "production" ? `
                     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
                     <script>
-                        // var OneSignal = window.OneSignal || [];
-                        // OneSignal.push(function() {
-                        //     OneSignal.init({
-                        //         appId: "",
-                        //         autoResubscribe: true,
-                        //         welcomeNotification: {
-                        //             disable: true
-                        //         }
-                        //     });
-                        // });
+                      var OneSignal = window.OneSignal || [];
+                      OneSignal.push(function() {
+                        OneSignal.init({
+                          appId: "599ef911-2dc2-4e24-810c-fadd6cd573b6",
+                        });
+                      });
                     </script>` : ""}
             </head>
             <body>
