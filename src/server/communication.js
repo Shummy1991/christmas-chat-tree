@@ -3,6 +3,8 @@ const streams = [];
 
 let nextStreamId = 0;
 
+let nextMessageId = 0;
+
 export default (app) => {
     app.post("/login", (req, res) => {
         const username = req.body.username || req.cookies.username;
@@ -20,9 +22,37 @@ export default (app) => {
             res.json({ success: false });
         }
     });
+
     app.get("/users", (req, res) => {
         res.json(users);
     });
+
+    const sendMessage = data => {
+        streams.forEach(stream => {
+            stream.res.write(sse(JSON.stringify({
+                type: "message",
+                data,
+            })));
+        });
+    };
+
+    app.post("/send-message", (req, res) => {
+        const { username } = req.cookies;
+        if (!username) return res.end();
+        const user = users.find(u => u.username === username);
+        if (!user) return res.end();
+        const { message } = req.body;
+        nextMessageId++;
+        sendMessage({
+            user,
+            message,
+            id: nextMessageId,
+            expiresIn: 1000 + message.length * 100,
+        });
+        res.end();
+    });
+
+
 
     app.get("/communication", async(req, res) => {
         res.writeHead(200, {
@@ -45,7 +75,7 @@ export default (app) => {
         streams.forEach(stream => {
             stream.res.write(sse(JSON.stringify({
                 type: "users",
-                users,
+                data: users,
             })));
         });
     };

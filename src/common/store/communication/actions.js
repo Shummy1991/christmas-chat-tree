@@ -1,4 +1,4 @@
-import { GET_USERS } from "./types";
+import { GET_USERS, RECEIVE_MESSAGE, REMOVE_MESSAGE } from "./types";
 
 export const getUsers = () => async(dispatch, getState, api) => {
     console.log("get users");
@@ -12,12 +12,32 @@ export const getUsers = () => async(dispatch, getState, api) => {
 export const startCommunication = () => async(dispatch, getState, api) => {
     const eventSource = new EventSource("/api/communication");
     eventSource.onmessage = (message) => {
-        const { users, type } = JSON.parse(message.data);
-        if (type === "users") {
-            dispatch({
-                type: GET_USERS,
-                payload: users,
-            });
+        const { type, data } = JSON.parse(message.data);
+        switch (type) {
+            case "users": {
+                return dispatch({
+                    type: GET_USERS,
+                    payload: data,
+                });
+            }
+            case "message": {
+                setTimeout(() => {
+                    dispatch({
+                        type: REMOVE_MESSAGE,
+                        payload: data.id,
+                    });
+                }, data.expiresIn);
+                return dispatch({
+                    type: RECEIVE_MESSAGE,
+                    payload: data,
+                });
+            }
+            default:
+                break;
         }
     };
+};
+
+export const sendMessage = data => async(dispatch, getState, api) => {
+    await api.post("/send-message", data);
 };

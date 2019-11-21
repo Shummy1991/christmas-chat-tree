@@ -90,7 +90,25 @@ export default async(req, store, context, res) => {
             <div id="modal-root"></div>
             <div id="notification-root"></div>
             ${!isDev ? `<script> window.INITIAL_STATE = ${serialize(store.getState())}</script>` : ""}
-            <script src="/bundle.js"></script>
+            <script>
+              function include(scriptUrl)
+              {
+                  var xmlhttp = new XMLHttpRequest();
+                  xmlhttp.open("GET", scriptUrl);
+                  xmlhttp.onprogress = function(e) {
+                    console.log(e.loaded / e.total * 100);
+                  }
+                  xmlhttp.onreadystatechange = function()
+                  {
+                      if ((xmlhttp.status == 200) && (xmlhttp.readyState == 4))
+                      {
+                          eval(xmlhttp.responseText);
+                      }
+                  };
+                  xmlhttp.send();
+              }
+              include('/bundle.js');
+            </script>
         </body>
     </html>`;
     if (context.url) {

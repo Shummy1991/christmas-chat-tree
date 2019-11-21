@@ -4,23 +4,29 @@ import { connect } from "react-redux";
 import ChristmasTree from "../../components/ChristmasTree";
 import Users from "../../components/Users";
 import Login from "../../components/Login";
+import SendMessage from "../../components/SendMessage";
 
 class Home extends Component {
     render() {
-        const { user, users } = this.props;
+        const { user, users, messages } = this.props;
         return (
             <ChristmasTree>
-                <Users users={users}/>
+                <Users users={users} messages={messages}/>
                 {user.username
-                    ? null
+                    ? <SendMessage/>
                     : <Login/>
                 }
+                
             </ChristmasTree>
         );
     }
 }
 
-const mapStateToProps = ({ user, communication: { users } }) => ({ user, users });
+const mapStateToProps = ({ user, communication: { users, messages } }) => ({
+    user,
+    users,
+    messages
+});
 
 export default {
     component: connect(mapStateToProps)(Home),
