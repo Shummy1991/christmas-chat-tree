@@ -7,6 +7,7 @@ const MessageWrapper = styled.div`
     margin-top: 6px;
     max-width: 200px;
     position: absolute;
+    z-index: 2;
     top: calc(100% + 8px);
     width: 200px;
     left: 50%;
