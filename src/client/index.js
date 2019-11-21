@@ -22,7 +22,9 @@ const history = createBrowserHistory();
 
 
 const axiosInstance = axios.create({
-    baseURL: "/api"
+    baseURL: "https://christmas-chat-tree.herokuapp.com/api",
+    // baseURL: "/api"
+    withCredentials: true,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

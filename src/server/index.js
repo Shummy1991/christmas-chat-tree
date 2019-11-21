@@ -4,9 +4,14 @@ import communication from "./communication";
 import cors from "cors";
 
 
+const allowAccess = res => {
+    res.setHeader("Access-Control-Allow-Credentials", true);
+    res.setHeader("Access-Control-Allow-Origin", "localhost:4000");
+}
 export default (app) => {
     app.use(cors());
     app.post("*", (req, res, next) => {
+        allowAccess(res);
         if (req.url.slice(0, 5) === "/api/") {
             req.url = req.url.slice(4);
             return next();
@@ -16,6 +21,7 @@ export default (app) => {
     });
 
     app.get("*", (req, res, next) => {
+        allowAccess(res);
         if (req.url.slice(0, 5) === "/api/") {
             req.url = req.url.slice(4);
             return next();
