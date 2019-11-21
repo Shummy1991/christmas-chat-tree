@@ -11,7 +11,7 @@ const allowAccess = res => {
 
 export default (app) => {
     app.use(cors());
-    app.option("*", (req, res, next) => {
+    app.options("*", (req, res, next) => {
         allowAccess(res);
         return next();
     });
