@@ -23,8 +23,7 @@ const history = createBrowserHistory();
 
 
 const axiosInstance = axios.create({
-    baseURL: baseURL,
-    // baseURL: "/api"
+    baseURL,
     withCredentials: true,
 });
 

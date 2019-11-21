@@ -3,35 +3,9 @@ import cookieParser from "cookie-parser";
 import communication from "./communication";
 import cors from "cors";
 
-
-const allowAccess = res => {
-    res.setHeader("Access-Control-Allow-Credentials", true);
-    res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS");
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:4000");
-};
-
 export default (app) => {
-    app.use(cors());
-    app.options("*", (req, res, next) => {
-        allowAccess(res);
-        if (req.url.slice(0, 5) === "/api/") {
-            req.url = req.url.slice(4);
-            return next();
-        }
-        return next();
-    });
-    app.post("*", (req, res, next) => {
-        allowAccess(res);
-        if (req.url.slice(0, 5) === "/api/") {
-            req.url = req.url.slice(4);
-            return next();
-        }
-        req.url = "/";
-        return next();
-    });
-
-    app.get("*", (req, res, next) => {
-        allowAccess(res);
+    app.use(cors({ credentials: true, origin: true }));
+    app.use((req, res, next) => {
         if (req.url.slice(0, 5) === "/api/") {
             req.url = req.url.slice(4);
             return next();
