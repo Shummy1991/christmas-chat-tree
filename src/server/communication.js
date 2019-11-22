@@ -1,3 +1,6 @@
+import axios from "axios";
+import onesignalAppId from "../common/onesignalAppId";
+
 const users = [];
 const streams = [];
 
@@ -49,6 +52,22 @@ export default (app) => {
             id: nextMessageId,
             expiresIn: 1000 + message.length * 100,
         });
+        if (process.env.NODE_ENV === "production") {
+            axios.post("https://onesignal.com/api/v1/notifications",
+                {
+                    "app_id": onesignalAppId,
+                    "included_segments": ["All"],
+                    "contents": {
+                        en: `${user.username}: ${message}`
+                    }
+                }, {
+                    headers: {
+                        "Content-Type": "application/json; charset=utf-8",
+                        "Authorization": `Basic ${process.env.ONESIGNAL_API_KEY}`
+                    },
+                }
+            );
+        }
         res.end();
     });
 

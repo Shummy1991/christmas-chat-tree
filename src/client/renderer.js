@@ -9,6 +9,7 @@ import routes from "./routes";
 
 import { ServerStyleSheet, StyleSheetManager } from "styled-components";
 import { Helmet } from "react-helmet";
+import onesignalAppId from "../common/onesignalAppId";
 
 // import { onesignalAppId } from "../common/parameters";
 
@@ -74,7 +75,7 @@ export default async(req, store, context, res) => {
                       var OneSignal = window.OneSignal || [];
                       OneSignal.push(function() {
                         OneSignal.init({
-                          appId: "599ef911-2dc2-4e24-810c-fadd6cd573b6",
+                          appId: "${onesignalAppId}",
                         });
                       });
                     </script>` : ""}
