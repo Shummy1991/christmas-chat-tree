@@ -25,11 +25,11 @@ const Message = styled.div`
 
 export default ({ users, messages }) => (
     <div>
-        {users.map(({ username, position }) => {
-            const Element = Elements[position];
+        {users.filter(u => u !== null).map(({ username }, index) => {
+            const Element = Elements[index];
             const message = messages.find(m => m.user.username === username);
             return (
-                <Element key={position}>
+                <Element key={index}>
                     <Username>{username}</Username>
                     {message && (
                         <MessageWrapper>

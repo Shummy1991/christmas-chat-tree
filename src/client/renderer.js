@@ -20,32 +20,16 @@ const isDev = process.env.NODE_ENV === "development";
 export default async(req, store, context, res) => {
     let language = req.renderLang;
     let assetHost = "/images";
-    let url = "";
     const sheet = new ServerStyleSheet();
     let jsx;
-    if (process.env.NODE_ENV !== "development") {
-        url = `https://${req.headers.host}${req.path}`;
-    }
-    let alts = [{
-        url,
-        lang: "x-default"
-    }];
-    alts.unshift({
-        url: url + (url.indexOf("?") === -1 ? "?" : "&") + "lang=hu",
-        lang: "hu"
-    });
     const helmet = Helmet.renderStatic();
     const htmlStart = `
         <!DOCTYPE html>
-        <html lang="${language}">
+        <html lang="en">
             <head>
                 <meta charset="utf-8">
                 ${helmet.title.toString()}
                 ${helmet.meta.toString()}
-                <link href="${url}" rel="canonical">
-                ${alts.map(alt => `<link rel="alternate" hreflang="${alt.lang}" href="${alt.url}"
-                `).join("")}
-                <meta property="og:url" content="${url}">
 
                 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, shrink-to-fit=no, user-scalable=yes">
                 <meta name="lang" content="${language}">
@@ -87,25 +71,7 @@ export default async(req, store, context, res) => {
             <div id="modal-root"></div>
             <div id="notification-root"></div>
             ${!isDev ? `<script> window.INITIAL_STATE = ${serialize(store.getState())}</script>` : ""}
-            <script>
-              function include(scriptUrl)
-              {
-                  var xmlhttp = new XMLHttpRequest();
-                  xmlhttp.open("GET", scriptUrl);
-                  xmlhttp.onprogress = function(e) {
-                    console.log(e.loaded / e.total * 100);
-                  }
-                  xmlhttp.onreadystatechange = function()
-                  {
-                      if ((xmlhttp.status == 200) && (xmlhttp.readyState == 4))
-                      {
-                          eval(xmlhttp.responseText);
-                      }
-                  };
-                  xmlhttp.send();
-              }
-              include('/bundle.js');
-            </script>
+            <script src="/bundle.js"></script>
         </body>
     </html>`;
     if (context.url) {

@@ -1,10 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 
 import ChristmasTree from "../../components/ChristmasTree";
 import Users from "../../components/Users";
 import Login from "../../components/Login";
 import SendMessage from "../../components/SendMessage";
+import Logout from "../../components/Logout";
 
 class Home extends Component {
     render() {
@@ -13,7 +14,10 @@ class Home extends Component {
             <ChristmasTree>
                 <Users users={users} messages={messages}/>
                 {user.username
-                    ? <SendMessage/>
+                    ? <Fragment>
+                        <SendMessage/>
+                        <Logout/>
+                    </Fragment>
                     : <Login/>
                 }
                 
