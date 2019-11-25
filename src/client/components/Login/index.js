@@ -19,6 +19,7 @@ const StyledLogin = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 5;
 `;
 
 const Form = styled.form`
@@ -60,7 +61,7 @@ class Login extends React.Component {
         username: ""
     }
     changeUsername = ({ target: { value } }) => {
-        if (value.length > 12) return;
+        if (value.length > 9) return;
         this.setState({ username: value });
     }
     submit = (e) => {

@@ -71,51 +71,6 @@ export class SkyBackground extends Component {
     }
 }
 
-
-const StyledDecorationMoon = styled.div`
-    position: absolute;
-    top: ${720 * 1.5 - 300}px;
-    left: ${1420 * 2 - 200}px;
-    img {
-        height: 120px;
-    }
-`;
-
-const StyledDecorationSnowflake = styled.div`
-    position: absolute;
-    top: ${720 * 1.5 - 340}px;
-    left: ${1420 + 10}px;
-    img {
-        height: 130px;
-    }
-`;
-
-const StyledDecorationTrees = styled.div`
-    position: absolute;
-    top: 1120px;
-    left: 1340px;
-`;
-
-
-
-
-
-
-const StyledHouse = styled.div`
-    position: absolute;
-    top: 305px;
-    left: 1150px;
-    z-index: 1;
-    img {
-        height: 270px;
-    }
-`;
-export const House = () => (
-    <StyledHouse>
-        <img src="/images/house.svg" alt="house"></img>
-    </StyledHouse>
-);
-
 const LandscapeBackground = styled.div`
     ${backgroundCss}
 `;
@@ -125,15 +80,6 @@ export class Landscape extends Component {
         return (
             <LandscapeBackground>
                 <img src="/images/landscape.svg" alt=""/>
-                <StyledDecorationMoon>
-                    <img src="/images/decoration_moon.svg" alt="moon"></img>
-                </StyledDecorationMoon>
-                <StyledDecorationSnowflake>
-                    <img src="/images/decoration_snowflake.svg" alt="snowflakes"></img>
-                </StyledDecorationSnowflake>
-                <StyledDecorationTrees>
-                    <img src="/images/decoration_trees.svg" alt="trees"></img>
-                </StyledDecorationTrees>
             </LandscapeBackground>
         );
     }
@@ -203,7 +149,6 @@ export default class ChristmasTree extends Component {
                 }}>
                     <Content>
                         <SkyBackground/>
-                        <House/>
                         <Landscape/>
                         <Meteor/>
                         {children}

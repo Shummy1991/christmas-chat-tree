@@ -1,7 +1,33 @@
 import axios from "axios";
 import onesignalAppId from "../common/onesignalAppId";
 
-const users = [];
+const users = [
+    {username: "My User 1"},
+    {username: "My User 2"},
+    {username: "My User 3"},
+    {username: "My User 4"},
+    {username: "My User 5"},
+    {username: "My User 6"},
+    {username: "My User 7"},
+    {username: "My User 8"},
+    {username: "My User 9"},
+    {username: "My User 10"},
+    {username: "My User 11"},
+    {username: "My User 12"},
+    {username: "My User 13"},
+    {username: "My User 14"},
+    {username: "My User 15"},
+    {username: "My User 16"},
+    {username: "My User 17"},
+    {username: "My User 18"},
+    {username: "My User 19"},
+    {username: "My User 20"},
+    {username: "My User 21"},
+    {username: "My User 22"},
+    {username: "My User 23"},
+    {username: "My User 24"},
+    {username: "My User 25"},
+];
 const streams = [];
 
 let nextStreamId = 0;
