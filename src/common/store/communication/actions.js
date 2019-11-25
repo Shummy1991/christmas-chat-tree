@@ -21,12 +21,12 @@ export const startCommunication = () => async(dispatch, getState, api) => {
                 });
             }
             case "message": {
-                // setTimeout(() => {
-                //     dispatch({
-                //         type: REMOVE_MESSAGE,
-                //         payload: data.id,
-                //     });
-                // }, data.expiresIn);
+                setTimeout(() => {
+                    dispatch({
+                        type: REMOVE_MESSAGE,
+                        payload: data.id,
+                    });
+                }, data.expiresIn);
                 return dispatch({
                     type: RECEIVE_MESSAGE,
                     payload: data,
