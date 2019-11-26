@@ -5,3 +5,5 @@ coverage
 upload/*
 mongodb
 s3
+server.bundle.js
+src/public/bundle.js

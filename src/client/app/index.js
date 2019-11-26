@@ -4,7 +4,6 @@ import { renderRoutes } from "../react-router-config";
 import { connect } from "react-redux";
 
 import { withRouter } from "react-router-dom";
-// import routing from "../routing";
 
 import { ThemeProvider } from "styled-components";
 import { login } from "../../common/store/user/actions";

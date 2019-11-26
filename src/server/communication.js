@@ -1,33 +1,7 @@
 import axios from "axios";
 import onesignalAppId from "../common/onesignalAppId";
 
-const users = [
-    {username: "My User 1"},
-    {username: "My User 2"},
-    {username: "My User 3"},
-    {username: "My User 4"},
-    {username: "My User 5"},
-    {username: "My User 6"},
-    {username: "My User 7"},
-    {username: "My User 8"},
-    {username: "My User 9"},
-    {username: "My User 10"},
-    {username: "My User 11"},
-    {username: "My User 12"},
-    {username: "My User 13"},
-    {username: "My User 14"},
-    {username: "My User 15"},
-    {username: "My User 16"},
-    {username: "My User 17"},
-    {username: "My User 18"},
-    {username: "My User 19"},
-    {username: "My User 20"},
-    {username: "My User 21"},
-    {username: "My User 22"},
-    {username: "My User 23"},
-    {username: "My User 24"},
-    {username: "My User 25"},
-];
+const users = [];
 const streams = [];
 
 let nextStreamId = 0;
@@ -64,11 +38,15 @@ export default (app) => {
         res.end();
     });
 
+    // only for server-side rendering
     app.get("/users", (req, res) => {
         res.json(users);
     });
 
+    // TASK 2: communication
+    // TASK 2C: broadcasting messages
     const sendMessage = data => {
+        // for each stream send a message with type message along with the data
         streams.forEach(stream => {
             stream.res.write(sse(JSON.stringify({
                 type: "message",
@@ -90,6 +68,7 @@ export default (app) => {
             id: nextMessageId,
             expiresIn: 1000 + message.length * 100,
         });
+        // TASK 4: broadcast message throught ONESIGNAL push notifications
         if (process.env.NODE_ENV === "production") {
             axios.post("https://onesignal.com/api/v1/notifications",
                 {
@@ -110,16 +89,18 @@ export default (app) => {
     });
 
 
-
+    // TASK 2A: connect client to server
     app.get("/communication", async(req, res) => {
+        // set status to 200 and set the 2 required headers for a server-sent-event. Google it.
         res.writeHead(200, {
             "Content-Type": "text/event-stream",
             "Cache-Control": "no-cache",
-            "Access-Control-Allow-Origin": "*",
         });
         const id = nextStreamId;
+        // push the res along with the id to the streams in an object
         streams.push({ res, id });
         nextStreamId++;
+        // send a welcome message to the client using the sse function. Stringify an object with the type connected. Use the write method.
         res.write(sse(JSON.stringify({
             type: "connected"
         })));
@@ -128,7 +109,9 @@ export default (app) => {
         });
     });
 
+    // TASK 2B: resfreshing userlist
     const refreshUsers = () => {
+        // for each stream send a message with type users along with users as the data.
         streams.forEach(stream => {
             stream.res.write(sse(JSON.stringify({
                 type: "users",

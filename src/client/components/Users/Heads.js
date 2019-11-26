@@ -328,7 +328,6 @@ const StyledUsername = styled.div`
     transform: translate(-50%);
     text-align: center;
     font-size: 14px;
-    /* margin-top: -20px; */
 `;
 
 
