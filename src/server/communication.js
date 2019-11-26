@@ -1,6 +1,3 @@
-// import axios from "axios";
-// import onesignalAppId from "../common/onesignalAppId";
-
 const users = [];
 const streams = [];
 
@@ -68,10 +65,6 @@ export default (app) => {
             id: nextMessageId,
             expiresIn: 1000 + message.length * 100,
         });
-        // TASK 4: broadcast message throught ONESIGNAL push notifications
-        if (process.env.NODE_ENV === "production") {
-            // your code comes here...
-        }
         res.end();
     });
 
