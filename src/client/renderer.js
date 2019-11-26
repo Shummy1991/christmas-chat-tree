@@ -53,9 +53,6 @@ export default async(req, store, context, res) => {
                 <meta name="msapplication-TileImage" content="${assetHost}/ms-icon-144x144.png">
                 <meta name="theme-color" content="#00968b">
                 <link href='${process.env.NODE_ENV === "development" ? "/font.css" : "/font-prod.css"}' rel="stylesheet" />
-                ${process.env.NODE_ENV === "production" ? `
-                    <!-- TASK 3B: paste scripts from ONESIGNAL -->
-                ` : ""}
             </head>
             <body>
                 <div id="root">`;
