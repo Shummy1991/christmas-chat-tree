@@ -1,7 +1,7 @@
 {
-  "name": "musicators",
+  "name": "christmas-chat-tree",
   "version": "1.0.0",
-  "description": "",
+  "description": "Build your own chat in React with Server-Sent Events & OneSignal",
   "main": "src/client.js",
   "engines": {
     "node": ">=10.12.0",
