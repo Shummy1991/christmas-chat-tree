@@ -10,7 +10,7 @@ export const getUsers = () => async(dispatch, getState, api) => {
 };
 // TASK 1: connection and getting data through SSE
 export const startCommunication = () => async(dispatch, getState, api) => {
-    // connect to the eventstream @ baseURL + "/communication"
+    // connect to the eventsource @ baseURL + "/communication"
     // ...
     // listen for messages (you can send a message to see a new message arrive)
     // ...
